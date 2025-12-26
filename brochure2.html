@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pork Sisig Recipe Brochure</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Roboto:wght@300;400;500;700&family=Kalam:wght@400;700&display=swap" rel="stylesheet">
     <style>
         /* CSS Reset & Base */
         * {
@@ -13,307 +14,582 @@
         }
 
         body {
-            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: #f8f5f0;
-            padding: 20px;
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.7;
+            color: #2c1810;
+            background: linear-gradient(135deg, #f9f3eb 0%, #f5e9d9 100%);
+            padding: 25px;
             display: flex;
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(193, 68, 68, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(209, 140, 71, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 50% 50%, rgba(139, 69, 19, 0.03) 0%, transparent 30%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Decorative Elements */
+        .decorative-leaf {
+            position: fixed;
+            width: 150px;
+            height: 150px;
+            opacity: 0.05;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .leaf-1 {
+            top: 5%;
+            left: 5%;
+            transform: rotate(45deg);
+        }
+
+        .leaf-2 {
+            bottom: 5%;
+            right: 5%;
+            transform: rotate(-45deg);
         }
 
         /* Controls */
         .controls {
-            margin-bottom: 30px;
+            margin-bottom: 35px;
             display: flex;
-            gap: 20px;
+            gap: 25px;
             align-items: center;
             flex-wrap: wrap;
             justify-content: center;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            max-width: 800px;
+            padding: 20px 30px;
+            background: rgba(255, 255, 255, 0.92);
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(193, 68, 68, 0.15);
+            max-width: 850px;
             width: 100%;
+            border: 2px solid rgba(209, 140, 71, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .controls::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #c14444, #d18c47, #8b4513);
         }
 
         button {
-            background: #c14444;
+            background: linear-gradient(135deg, #c14444 0%, #a53737 100%);
             color: white;
             border: none;
-            padding: 12px 24px;
-            border-radius: 6px;
-            font-weight: bold;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
             font-size: 16px;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 12px rgba(193, 68, 68, 0.3);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        button::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+            z-index: -1;
         }
 
         button:hover {
-            background: #a53737;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(193, 68, 68, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(193, 68, 68, 0.4);
+        }
+
+        button:hover::before {
+            left: 100%;
         }
 
         .toggle-label {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-weight: 500;
-            color: #555;
+            gap: 12px;
+            font-weight: 600;
+            color: #5a3c2a;
             cursor: pointer;
+            padding: 10px 15px;
+            background: rgba(249, 243, 235, 0.8);
+            border-radius: 8px;
+            border: 1px solid rgba(209, 140, 71, 0.3);
         }
 
         .toggle-label input {
-            width: 18px;
-            height: 18px;
+            width: 20px;
+            height: 20px;
             cursor: pointer;
+            accent-color: #c14444;
         }
 
         /* Brochure Container */
         .brochure-container {
             width: 100%;
-            max-width: 1180px;
+            max-width: 1200px;
             background: white;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            border-radius: 8px;
+            box-shadow: 
+                0 20px 50px rgba(0, 0, 0, 0.2),
+                0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+            border-radius: 12px;
             overflow: hidden;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
             position: relative;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .brochure-container::before {
+            content: "";
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 2px dashed rgba(193, 68, 68, 0.15);
+            border-radius: 8px;
+            pointer-events: none;
+            z-index: 1;
         }
 
         .brochure {
             display: flex;
-            min-height: 680px;
+            min-height: 720px;
             position: relative;
+            background: linear-gradient(90deg, 
+                rgba(249, 243, 235, 0.1) 0%,
+                rgba(249, 243, 235, 0.05) 33.33%,
+                rgba(254, 249, 245, 0.05) 33.33%,
+                rgba(254, 249, 245, 0.05) 66.66%,
+                rgba(249, 243, 235, 0.05) 66.66%,
+                rgba(249, 243, 235, 0.1) 100%);
         }
 
         /* Panels */
         .panel {
             flex: 1;
-            padding: 40px 35px;
+            padding: 45px 40px;
             position: relative;
             overflow: hidden;
-            border-right: 1px solid #eee;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.4s ease;
+            z-index: 2;
+        }
+
+        .panel::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: 300px 300px;
+            opacity: 0.03;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .panel-1::before {
+            background-image: 
+                radial-gradient(circle at 30% 30%, #c14444 2px, transparent 3px),
+                radial-gradient(circle at 70% 70%, #d18c47 2px, transparent 3px);
+        }
+
+        .panel-2::before {
+            background-image: 
+                repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(193, 68, 68, 0.05) 10px, rgba(193, 68, 68, 0.05) 20px);
+        }
+
+        .panel-3::before {
+            background-image: 
+                radial-gradient(circle at 50% 50%, #8b4513 1px, transparent 2px);
+            background-size: 40px 40px;
         }
 
         .panel:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            transform: translateY(-2px);
+            z-index: 10;
         }
 
-        .panel:last-child {
-            border-right: none;
-        }
-
-        /* Fold Guides - visible in preview */
-        .fold-guide {
+        .panel:hover::after {
+            content: "";
             position: absolute;
             top: 0;
-            width: 0;
+            left: 0;
+            width: 100%;
             height: 100%;
-            border-left: 2px dashed rgba(193, 68, 68, 0.4);
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Fold Guides */
+        .fold-guide {
+            position: absolute;
+            top: 20px;
+            width: 0;
+            height: calc(100% - 40px);
             z-index: 5;
             pointer-events: none;
         }
 
         .fold-left {
             left: 33.333%;
+            border-left: 3px dashed rgba(193, 68, 68, 0.4);
+            box-shadow: 
+                -3px 0 10px rgba(193, 68, 68, 0.1),
+                3px 0 10px rgba(193, 68, 68, 0.1);
         }
 
         .fold-right {
             left: 66.666%;
+            border-left: 3px dashed rgba(139, 69, 19, 0.4);
+            box-shadow: 
+                -3px 0 10px rgba(139, 69, 19, 0.1),
+                3px 0 10px rgba(139, 69, 19, 0.1);
         }
 
-        /* Panel-specific backgrounds */
+        /* Panel Colors and Borders */
         .panel-1 {
-            background: linear-gradient(to bottom, #f9f3eb 0%, #ffffff 20%);
-            color: #2c1810;
+            background: linear-gradient(135deg, #fff9f0 0%, #fff5e6 100%);
+            border-right: 1px solid rgba(193, 68, 68, 0.1);
         }
 
         .panel-2 {
-            background: linear-gradient(to bottom, #fef9f5 0%, #ffffff 20%);
-            color: #2c1810;
+            background: linear-gradient(135deg, #fffcf5 0%, #fffaf0 100%);
+            border-right: 1px solid rgba(209, 140, 71, 0.1);
         }
 
         .panel-3 {
-            background: linear-gradient(to bottom, #f9f3eb 0%, #ffffff 20%);
-            color: #2c1810;
+            background: linear-gradient(135deg, #fff9f0 0%, #fff5e6 100%);
         }
 
-        /* Header decorative elements */
+        /* Header Decoration */
         .panel-header {
             position: relative;
-            margin-bottom: 30px;
-            padding-bottom: 15px;
+            margin-bottom: 35px;
+            padding-bottom: 20px;
         }
 
         .panel-header::after {
-            content: '';
+            content: "";
             position: absolute;
             bottom: 0;
             left: 0;
-            width: 60px;
-            height: 4px;
-            background: #c14444;
-            border-radius: 2px;
+            width: 80px;
+            height: 6px;
+            background: linear-gradient(90deg, #c14444, #d18c47);
+            border-radius: 3px;
+            box-shadow: 0 2px 8px rgba(193, 68, 68, 0.3);
         }
 
         .panel-2 .panel-header::after {
-            background: #d18c47;
+            background: linear-gradient(90deg, #d18c47, #8b4513);
         }
 
         .panel-3 .panel-header::after {
-            background: #8b4513;
+            background: linear-gradient(90deg, #8b4513, #5a3c2a);
         }
 
         /* Typography */
         h1 {
-            font-family: 'Brush Script MT', 'Segoe Print', cursive;
-            font-size: 3.8rem;
+            font-family: 'Dancing Script', cursive;
+            font-size: 4.2rem;
             text-align: center;
-            color: #8b4513;
-            margin-bottom: 20px;
-            line-height: 1.2;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-            padding: 0 10px;
+            background: linear-gradient(135deg, #c14444 0%, #8b4513 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 25px;
+            line-height: 1.1;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1);
+            padding: 0 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        h1::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #d18c47, transparent);
         }
 
         h2 {
-            font-family: 'Georgia', 'Times New Roman', serif;
-            font-size: 1.8rem;
-            color: #c14444;
-            margin-bottom: 10px;
-            letter-spacing: 0.5px;
+            font-family: 'Kalam', cursive;
+            font-size: 2.2rem;
+            color: #5a3c2a;
+            margin-bottom: 15px;
+            letter-spacing: 0.8px;
+            position: relative;
+            display: inline-block;
+            padding-right: 20px;
         }
 
         h3 {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             color: #8b4513;
-            margin: 25px 0 15px;
-            font-weight: 600;
+            margin: 30px 0 20px;
+            font-weight: 700;
+            padding-left: 15px;
+            border-left: 4px solid #d18c47;
+            background: linear-gradient(90deg, rgba(209, 140, 71, 0.1), transparent);
         }
 
         p, li {
-            font-size: 1.05rem;
-            margin-bottom: 10px;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: #3a2c1e;
         }
 
         ul, ol {
-            padding-left: 24px;
-            margin-bottom: 20px;
+            padding-left: 30px;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        ul::before, ol::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, #c14444, #d18c47, #8b4513);
+            border-radius: 3px;
         }
 
         li {
-            margin-bottom: 12px;
+            margin-bottom: 15px;
+            padding-left: 10px;
+            position: relative;
         }
 
-        /* Step styling */
+        li::before {
+            content: "•";
+            color: #c14444;
+            font-weight: bold;
+            font-size: 1.5rem;
+            position: absolute;
+            left: -20px;
+            top: -2px;
+        }
+
+        /* Step Styling */
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
         .step {
-            margin-bottom: 22px;
-            padding-left: 40px;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 
+                0 5px 15px rgba(0, 0, 0, 0.08),
+                0 0 0 1px rgba(209, 140, 71, 0.1) inset;
+            transition: all 0.3s ease;
             position: relative;
+            overflow: hidden;
+        }
+
+        .step:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                0 10px 25px rgba(193, 68, 68, 0.15),
+                0 0 0 2px rgba(193, 68, 68, 0.1) inset;
+        }
+
+        .step::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #c14444, #d18c47);
         }
 
         .step-number {
             position: absolute;
-            left: 0;
-            top: 0;
-            width: 30px;
-            height: 30px;
-            background: #c14444;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #c14444, #8b4513);
             color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            font-size: 0.9rem;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 8px rgba(193, 68, 68, 0.3);
         }
 
         .step-title {
-            font-weight: bold;
+            font-weight: 800;
             color: #8b4513;
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 12px;
+            font-size: 1.3rem;
+            padding-right: 50px;
+            border-bottom: 2px solid rgba(209, 140, 71, 0.3);
+            padding-bottom: 8px;
         }
 
-        /* Icons */
-        .icon {
-            width: 28px;
-            height: 28px;
-            display: inline-block;
-            vertical-align: middle;
-            margin-right: 10px;
-            fill: currentColor;
+        /* Icons and Graphics */
+        .icon-container {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #fff5e6, #ffe4cc);
+            border-radius: 12px;
+            margin-right: 15px;
+            box-shadow: 0 4px 8px rgba(193, 68, 68, 0.2);
+            border: 2px solid rgba(209, 140, 71, 0.3);
         }
 
         .title-icon {
-            width: 60px;
-            height: 60px;
-            margin: 0 auto 20px;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 25px;
             display: block;
-            color: #c14444;
+            filter: drop-shadow(0 4px 12px rgba(193, 68, 68, 0.3));
+            animation: float 6s ease-in-out infinite;
         }
 
         .section-icon {
-            width: 36px;
-            height: 36px;
-            margin-bottom: 10px;
+            width: 45px;
+            height: 45px;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+        }
+
+        .warning-icon {
             color: #c14444;
-        }
-
-        .panel-2 .section-icon {
-            color: #d18c47;
-        }
-
-        .panel-3 .section-icon {
-            color: #8b4513;
-        }
-
-.warning-icon {
-            color: #c14444;
-            width: 24px;
-            height: 24px;
+            width: 28px;
+            height: 28px;
             vertical-align: middle;
-            margin-right: 8px;
+            margin-right: 12px;
+            filter: drop-shadow(0 2px 3px rgba(193, 68, 68, 0.3));
+        }
+
+        /* Floating Animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
         }
 
         /* QR Code */
         .qr-container {
             text-align: center;
-            margin-top: 40px;
-            padding: 15px;
-            background: rgba(249, 243, 235, 0.7);
-            border-radius: 10px;
+            margin-top: 50px;
+            padding: 25px;
+            background: linear-gradient(135deg, rgba(255, 245, 230, 0.9), rgba(255, 235, 205, 0.9));
+            border-radius: 15px;
+            border: 2px dashed rgba(209, 140, 71, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .qr-container::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.3;
+            animation: moveBackground 20s linear infinite;
+        }
+
+        @keyframes moveBackground {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(20px, 20px); }
         }
 
         .qr-label {
-            font-size: 0.9rem;
-            color: #666;
-            margin-bottom: 8px;
+            font-size: 1rem;
+            color: #5a3c2a;
+            margin-bottom: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
         }
 
         .qr-code {
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
             margin: 0 auto;
-            background: #fff;
-            padding: 8px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background: white;
+            padding: 12px;
+            border-radius: 12px;
+            box-shadow: 
+                0 8px 16px rgba(0, 0, 0, 0.15),
+                0 0 0 2px rgba(209, 140, 71, 0.5);
+            position: relative;
+            z-index: 2;
         }
 
         /* Plate Illustration */
         .plate-illustration {
-            width: 120px;
-            height: 120px;
-            margin: 20px auto;
-            color: #d18c47;
+            width: 180px;
+            height: 180px;
+            margin: 30px auto;
+            filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.2));
+            animation: float 8s ease-in-out infinite;
+        }
+
+        /* Ingredients Graphics */
+        .ingredients-graphics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .ingredient-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto;
+            filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.2));
         }
 
         /* Print Styles */
@@ -324,19 +600,20 @@
                 background: white;
                 width: 297mm;
                 height: 210mm;
+                box-shadow: none;
             }
 
             .brochure {
                 min-height: 210mm;
-                box-shadow: none;
             }
 
-            .controls {
+            .controls, .decorative-leaf {
                 display: none;
             }
 
             .fold-guide {
                 border-left: 1px dashed rgba(0, 0, 0, 0.2);
+                box-shadow: none;
             }
 
             button, .toggle-label {
@@ -344,13 +621,25 @@
             }
 
             .panel {
-                padding: 20mm 12mm;
+                padding: 15mm 12mm;
                 page-break-inside: avoid;
                 break-inside: avoid;
             }
 
+            .panel:hover {
+                transform: none;
+                box-shadow: none;
+            }
+
+            .step:hover {
+                transform: none;
+                box-shadow: 
+                    0 5px 15px rgba(0, 0, 0, 0.08),
+                    0 0 0 1px rgba(209, 140, 71, 0.1) inset;
+            }
+
             h1 {
-                font-size: 3.2rem;
+                font-size: 3.5rem;
             }
 
             @page {
@@ -359,7 +648,7 @@
             }
         }
 
-        /* Screen adjustments */
+        /* Screen Adjustments */
         @media screen and (max-width: 1024px) {
             .brochure {
                 flex-direction: column;
@@ -368,7 +657,7 @@
 
             .panel {
                 border-right: none;
-                border-bottom: 1px solid #eee;
+                border-bottom: 1px solid rgba(209, 140, 71, 0.2);
             }
 
             .fold-guide {
@@ -380,41 +669,50 @@
             }
 
             h1 {
-                font-size: 3rem;
+                font-size: 3.5rem;
             }
         }
 
         @media screen and (max-width: 600px) {
             body {
-                padding: 10px;
+                padding: 15px;
             }
 
             .panel {
-                padding: 25px 20px;
+                padding: 30px 25px;
             }
 
             h1 {
-                font-size: 2.5rem;
+                font-size: 2.8rem;
             }
 
             h2 {
-                font-size: 1.5rem;
+                font-size: 1.8rem;
             }
 
             .controls {
                 flex-direction: column;
                 align-items: stretch;
+                padding: 20px;
             }
 
             button {
                 width: 100%;
             }
-        }
 
-        /* Print preview mode */
+            .steps-container {
+                grid-template-columns: 1fr;
+            }
+
+            .ingredients-graphics {
+                grid-template-columns: repeat(2, 1fr);
+            }
+                                                                                                                   }
+
+        
+/* Print Preview Mode */
         .print-preview .brochure-container {
-            box-shadow: none;
-            border: 1px solid #ccc;
+            box-shadow: 0 0 0 1px #ccc;
         }
 
         .print-preview .controls {
@@ -428,14 +726,35 @@
     </style>
 </head>
 <body>
+    <!-- Decorative Elements -->
+    <div class="decorative-leaf leaf-1">
+        <svg viewBox="0 0 100 100" aria-hidden="true">
+            <path d="M50,10 C70,10 85,25 85,45 C85,65 70,80 50,80 C30,80 15,65 15,45 C15,25 30,10 50,10 Z" fill="#c14444"/>
+            <path d="M50,20 C40,30 35,45 40,60 C45,75 55,80 60,70 C65,60 60,40 50,20 Z" fill="#d18c47" opacity="0.7"/>
+        </svg>
+    </div>
+    <div class="decorative-leaf leaf-2">
+        <svg viewBox="0 0 100 100" aria-hidden="true">
+            <path d="M50,10 C30,10 15,25 15,45 C15,65 30,80 50,80 C70,80 85,65 85,45 C85,25 70,10 50,10 Z" fill="#8b4513"/>
+            <path d="M50,20 C60,30 65,45 60,60 C55,75 45,80 40,70 C35,60 40,40 50,20 Z" fill="#c14444" opacity="0.7"/>
+        </svg>
+    </div>
+
+    <!-- Controls -->
     <div class="controls">
-        <button id="printBtn">Download PDF / I-print</button>
+        <button id="printBtn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="white" style="margin-right: 8px; vertical-align: middle;">
+                <path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/>
+            </svg>
+            Download PDF / I-print
+        </button>
         <label class="toggle-label">
             <input type="checkbox" id="previewToggle">
             I-preview bilang Print
         </label>
     </div>
 
+    <!-- Brochure Container -->
     <div class="brochure-container">
         <div class="fold-guide fold-left"></div>
         <div class="fold-guide fold-right"></div>
@@ -443,51 +762,89 @@
         <div class="brochure">
             <!-- Panel 1: Cover & Layunin -->
             <div class="panel panel-1">
-                <svg class="title-icon" viewBox="0 0 100 100" aria-hidden="true">
-                    <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" stroke-width="3"/>
-                    <path d="M30,40 Q50,20 70,40 M30,60 Q50,80 70,60 M40,35 L40,65 M60,35 L60,65" 
-                          stroke="currentColor" stroke-width="3" fill="none"/>
+                <svg class="title-icon" viewBox="0 0 200 200" aria-hidden="true">
+                    <defs>
+                        <linearGradient id="titleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#c14444"/>
+                            <stop offset="50%" stop-color="#d18c47"/>
+                            <stop offset="100%" stop-color="#8b4513"/>
+                        </linearGradient>
+                    </defs>
+                    <circle cx="100" cy="100" r="90" fill="url(#titleGradient)" opacity="0.9"/>
+                    <path d="M70,80 L130,80 L150,120 L130,160 L70,160 L50,120 Z" fill="white" stroke="#5a3c2a" stroke-width="3"/>
+                    <circle cx="100" cy="100" r="30" fill="#f5e9d9" stroke="#d18c47" stroke-width="3"/>
+                    <path d="M85,95 L100,110 L115,95 M95,85 L105,85 L105,115" stroke="#c14444" stroke-width="4" fill="none"/>
+                    <circle cx="70" cy="70" r="10" fill="#ffd700"/>
+                    <circle cx="130" cy="70" r="10" fill="#ffd700"/>
+                    <circle cx="100" cy="140" r="10" fill="#ffd700"/>
                 </svg>
                 
                 <h1>Paano Magluto ng Pork Sisig</h1>
                 
                 <div class="panel-header">
+                    <span class="icon-container">
+                        <svg class="section-icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M12 2L2 7V22H22V7L12 2Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                            <path d="M12 11V17M9 14H15" stroke="currentColor" stroke-width="2" fill="none"/>
+                        </svg>
+                    </span>
                     <h2>PAMAGAT</h2>
                 </div>
                 
-                <p>Ang pork sisig ay isang tanyag na pagkaing Pilipino na pinaghalong malutong na baboy, 
-                sibuyas, at siling labuyo na hinaluan ng calamansi at toyo.</p>
+                <p style="font-size: 1.2rem; font-style: italic; color: #8b4513; background: linear-gradient(90deg, rgba(209,140,71,0.1), transparent); padding: 15px; border-radius: 10px;">
+                    Ang pork sisig ay isang tanyag na pagkaing Pilipino na pinaghalong malutong na baboy, 
+                    sibuyas, at siling labuyo na hinaluan ng calamansi at toyo. Perpekto para sa mga okasyon!
+                </p>
                 
-                <div class="panel-header">
+                <div class="panel-header" style="margin-top: 40px;">
+                    <span class="icon-container">
+                        <svg class="section-icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" 
+                                  stroke="currentColor" stroke-width="1.5" fill="none"/>
+                            <path d="M12 16V12M12 8H12.01" stroke="currentColor" stroke-width="2" fill="none"/>
+                        </svg>
+                    </span>
                     <h2>LAYUNIN</h2>
                 </div>
                 
-                <p>Layunin ng prosedyur na ito na maituro ang tamang paraan ng pagluluto ng pork sisig 
-                sa malinaw, lohikal, at madaling sundan na mga hakbang upang makagawa ng masarap at ligtas na ulam sa bahay.</p>
+                <p style="font-size: 1.15rem; line-height: 1.8;">
+                    Layunin ng prosedyur na ito na maituro ang tamang paraan ng pagluluto ng pork sisig 
+                    sa <strong>malinaw</strong>, <strong>lohikal</strong>, at <strong>madaling sundan</strong> na mga hakbang upang makagawa ng masarap at ligtas na ulam sa bahay.
+                </p>
                 
                 <div class="plate-illustration">
-                    <svg viewBox="0 0 100 100" aria-hidden="true">
-                        <circle cx="50" cy="50" r="45" fill="#f5e9d9" stroke="#d18c47" stroke-width="2"/>
-                        <ellipse cx="50" cy="30" rx="30" ry="15" fill="#8b4513" opacity="0.7"/>
-                        <ellipse cx="50" cy="40" rx="25" ry="12" fill="#c14444" opacity="0.8"/>
-                        <circle cx="35" cy="35" r="4" fill="#ffd700"/>
-                        <circle cx="50" cy="40" r="4" fill="#ffd700"/>
-                        <circle cx="65" cy="35" r="4" fill="#ffd700"/>
+                    <svg viewBox="0 0 200 200" aria-hidden="true">
+                        <defs>
+                            <radialGradient id="plateGradient" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stop-color="#f5e9d9"/>
+                                <stop offset="100%" stop-color="#e8d4b5"/>
+                            </radialGradient>
+                        </defs>
+                        <circle cx="100" cy="100" r="85" fill="url(#plateGradient)" stroke="#d18c47" stroke-width="4"/>
+                        <ellipse cx="100" cy="70" rx="60" ry="30" fill="#8b4513" opacity="0.8"/>
+                        <ellipse cx="100" cy="90" rx="50" ry="25" fill="#c14444" opacity="0.9"/>
+                        <circle cx="80" cy="80" r="8" fill="#ffd700"/>
+                        <circle cx="100" cy="90" r="8" fill="#ffd700"/>
+                        <circle cx="120" cy="80" r="8" fill="#ffd700"/>
+                        <circle cx="90" cy="110" r="8" fill="#ffd700"/>
+                        <circle cx="110" cy="110" r="8" fill="#ffd700"/>
+                        <path d="M50,130 Q100,150 150,130" stroke="#5a3c2a" stroke-width="3" fill="none" stroke-linecap="round"/>
                     </svg>
                 </div>
                 
                 <div class="qr-container">
-                    <div class="qr-label">I-scan para sa video tutorial</div>
+                    <div class="qr-label">I-scan para sa video tutorial ng Pork Sisig</div>
                     <div class="qr-code">
                         <svg viewBox="0 0 100 100" aria-label="QR code placeholder para sa recipe video">
-                            <rect width="100" height="100" fill="white" stroke="#ccc" stroke-width="2"/>
-                            <rect x="10" y="10" width="20" height="20" fill="#333"/>
-                            <rect x="70" y="10" width="20" height="20" fill="#333"/>
-                            <rect x="10" y="70" width="20" height="20" fill="#333"/>
-                            <rect x="40" y="40" width="5" height="5" fill="#333"/>
-                            <rect x="55" y="40" width="5" height="5" fill="#333"/>
-                            <rect x="40" y="55" width="5" height="5" fill="#333"/>
-                            <rect x="70" y="70" width="5" height="20" fill="#333"/>
+                            <rect width="100" height="100" fill="white" stroke="#d18c47" stroke-width="3"/>
+                            <rect x="15" y="15" width="25" height="25" fill="#8b4513"/>
+                            <rect x="60" y="15" width="25" height="25" fill="#8b4513"/>
+                            <rect x="15" y="60" width="25" height="25" fill="#8b4513"/>
+                            <rect x="45" y="45" width="10" height="10" fill="#c14444"/>
+                            <rect x="60" y="45" width="10" height="10" fill="#c14444"/>
+                            <rect x="45" y="60" width="10" height="10" fill="#c14444"/>
+                            <rect x="60" y="60" width="25" height="10" fill="#c14444"/>
+                            <text x="50" y="95" text-anchor="middle" font-size="8" fill="#5a3c2a">SISIG RECIPE</text>
                         </svg>
                     </div>
                 </div>
@@ -496,139 +853,182 @@
             <!-- Panel 2: Kagamitan at Sangkap -->
             <div class="panel panel-2">
                 <div class="panel-header">
-                    <svg class="section-icon" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M12 2L2 7V22H22V7L12 2Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
-                        <path d="M2 7L12 12L22 7" stroke="currentColor" stroke-width="1.5" fill="none"/>
-                        <path d="M8 12V20M16 12V20" stroke="currentColor" stroke-width="1.5" fill="none"/>
-                    </svg>
+                    <span class="icon-container">
+                        <svg class="section-icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M12 2L2 7V22H22V7L12 2Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                            <path d="M8 12V20M16 12V20" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                            <path d="M12 12L12 20" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        </svg>
+                    </span>
                     <h2>MGA KAGAMITAN</h2>
                 </div>
                 
                 <ul>
-                    <li>Kaserola o malaking kaldero</li>
-                    <li>Ihawan o kawali</li>
-                    <li>Kutsilyo at chopping board</li>
-                    <li>Mangkok</li>
-                    <li>Sandok o kutsara</li>
-                    <li>Sizzling plate (opsyonal)</li>
+                    <li><strong>Kaserola</strong> o malaking kaldero (para sa pagpapakulo)</li>
+                    <li><strong>Ihawan</strong> o kawali (para sa pag-iihaw o pagprito)</li>
+                    <li><strong>Kutsilyo</strong> at chopping board (para sa pagtadtad)</li>
+                    <li><strong>Mangkok</strong> (para sa paghahalo ng sangkap)</li>
+                    <li><strong>Sandok</strong> o kutsara (para sa paghahalo at pagluluto)</li>
+                    <li><strong>Sizzling plate</strong> (opsyonal, para sa mas authentic na presentation)</li>
                 </ul>
                 
-                <div class="panel-header">
-                    <svg class="section-icon" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M6 14L8 10L12 8L16 10L18 14" stroke="currentColor" stroke-width="1.5" fill="none"/>
-                        <ellipse cx="12" cy="18" rx="6" ry="2" stroke="currentColor" stroke-width="1.5" fill="none"/>
-                        <circle cx="12" cy="8" r="1" fill="currentColor"/>
-                        <circle cx="8" cy="10" r="1" fill="currentColor"/>
-                        <circle cx="16" cy="10" r="1" fill="currentColor"/>
-                    </svg>
+                <div class="ingredients-graphics">
+                    <div class="ingredient-icon">
+                        <svg viewBox="0 0 100 100" aria-hidden="true">
+                            <rect x="30" y="20" width="40" height="60" rx="5" fill="#f5e9d9" stroke="#d18c47" stroke-width="3"/>
+                            <ellipse cx="50" cy="25" rx="25" ry="8" fill="#8b4513"/>
+                        </svg>
+                    </div>
+                    <div class="ingredient-icon">
+                        <svg viewBox="0 0 100 100" aria-hidden="true">
+                            <path d="M50,20 L80,50 L50,80 L20,50 Z" fill="#f5e9d9" stroke="#d18c47" stroke-width="3"/>
+                            <circle cx="50" cy="50" r="15" fill="#c14444"/>
+                        </svg>
+                    </div>
+                    <div class="ingredient-icon">
+                        <svg viewBox="0 0 100 100" aria-hidden="true">
+                            <path d="M30,70 L70,70 L65,30 L35,30 Z" fill="#f5e9d9" stroke="#d18c47" stroke-width="3"/>
+                            <rect x="40" y="35" width="20" height="25" fill="#8b4513"/>
+                        </svg>
+                    </div>
+                </div>
+                
+                <div class="panel-header" style="margin-top: 40px;">
+                    <span class="icon-container">
+                        <svg class="section-icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M6 14L8 10L12 8L16 10L18 14" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                            <ellipse cx="12" cy="18" rx="6" ry="2" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                            <circle cx="12" cy="8" r="2" fill="currentColor"/>
+                            <circle cx="8" cy="10" r="2" fill="currentColor"/>
+                            <circle cx="16" cy="10" r="2" fill="currentColor"/>
+                        </svg>
+                    </span>
                     <h2>MGA SANGKAP</h2>
                 </div>
                 
                 <ul>
-                    <li>½ kilo pork belly o maskara ng baboy</li>
-                    <li>Tubig (para sa pagpapakulo)</li>
-                    <li>1 sibuyas (tinadtad)</li>
-                    <li>2–3 siling labuyo (tinadtad, depende sa anghang)</li>
-                    <li>2 kutsarang calamansi o lemon juice</li>
-                    <li>2 kutsarang toyo</li>
-                    <li>1 kutsarang mayonnaise (opsyonal)</li>
-                    <li>Asin at paminta ayon sa panlasa</li>
+                    <li><strong>½ kilo</strong> pork belly o maskara ng baboy</li>
+                    <li><strong>Tubig</strong> (sapat para malunod ang baboy sa pagpapakulo)</li>
+                    <li><strong>1 sibuyas</strong> (hiniwa nang maliliit)</li>
+                    <li><strong>2–3 siling labuyo</strong> (hiniwa, depende sa gusto mong anghang)</li>
+                    <li><strong>2 kutsarang</strong> calamansi o lemon juice</li>
+                    <li><strong>2 kutsarang</strong> toyo</li>
+                    <li><strong>1 kutsarang</strong> mayonnaise (opsyonal, para sa creamy texture)</li>
+                    <li><strong>Asin at paminta</strong> ayon sa iyong panlasa</li>
                 </ul>
                 
-                <div style="margin-top: 40px; text-align: center;">
-                    <svg width="120" height="80" viewBox="0 0 120 80" aria-hidden="true">
-                        <rect x="10" y="30" width="40" height="40" rx="5" fill="#f5e9d9" stroke="#d18c47" stroke-width="1.5"/>
-                        <rect x="20" y="10" width="20" height="25" rx="3" fill="#f5e9d9" stroke="#d18c47" stroke-width="1.5"/>
-                        <rect x="70" y="20" width="40" height="50" rx="5" fill="#f5e9d9" stroke="#d18c47" stroke-width="1.5"/>
-                        <circle cx="90" cy="35" r="8" fill="#c14444" opacity="0.7"/>
-                        <circle cx="90" cy="55" r="8" fill="#8b4513" opacity="0.7"/>
-                    </svg>
+                <div style="margin-top: 40px; padding: 20px; background: linear-gradient(135deg, rgba(255,245,230,0.8), rgba(255,235,205,0.8)); border-radius: 15px; border: 2px solid rgba(209,140,71,0.3);">
+                    <h3 style="margin-top: 0; color: #c14444; text-align: center;">💡 Tip:</h3>
+                    <p style="text-align: center; font-style: italic; color: #5a3c2a;">
+                        Para sa mas malutong na sisig, patagalin ng kaunti ang pag-iihaw o pagprito ng baboy!
+                    </p>
                 </div>
             </div>
-
-<!-- Panel 3: Mga Hakbang at Paalala -->
+            
+            <!-- Panel 3: Mga Hakbang at Paalala -->
             <div class="panel panel-3">
                 <div class="panel-header">
-                    <svg class="section-icon" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M12 3V5M5 12H3M7.34 7.34L5.93 5.93M16.66 7.34L18.07 5.93" stroke="currentColor" stroke-width="1.5" fill="none"/>
-                        <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5" fill="none"/>
-                        <path d="M12 20V16" stroke="currentColor" stroke-width="1.5" fill="none"/>
-                    </svg>
+                    <span class="icon-container">
+                        <svg class="section-icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M12 3V5M5 12H3M7.34 7.34L5.93 5.93M16.66 7.34L18.07 5.93" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                            <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                            <path d="M12 20V16" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        </svg>
+                    </span>
                     <h2>MGA HAKBANG</h2>
-                    <p style="font-size: 0.95rem; color: #666; margin-top: 5px;">(Gumamit ng imperatibong pahayag)</p>
+                    <p style="font-size: 1.1rem; color: #8b4513; margin-top: 10px; font-weight: 500;">
+                        (Gumamit ng imperatibong pahayag)
+                    </p>
                 </div>
                 
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <span class="step-title">Pakuluan ang baboy.</span>
-                    Ilagay ang pork belly sa kaserola at lagyan ng sapat na tubig. Pakuluan hanggang lumambot ang karne. Patuluin at palamigin nang bahagya.
+                <div class="steps-container">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <span class="step-title">Pakuluan ang baboy</span>
+                        Ilagay ang pork belly sa kaserola at lagyan ng sapat na tubig. Pakuluan sa katamtamang apoy ng 45-60 minuto hanggang lumambot ang karne. Patuluin at palamigin nang bahagya.
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <span class="step-title">I-ihaw o iprito</span>
+                        Ihawin ang pinakuluang baboy sa grill o ihawan hanggang maging bahagyang crispy at brown ang balat. Kung walang ihawan, maaaring iprito sa mainit na mantika.
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <span class="step-title">Tadtarin ang karne</span>
+                        Kapag lumamig na ng kaunti, tadtarin ang baboy sa maliliit at manipis na piraso gamit ang kutsilyo. Mas mainam kung may crispy parts.
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <span class="step-title">Ihanda ang halo</span>
+                        Sa isang malaking mangkok, pagsamahin ang tinadtad na baboy, sibuyas, siling labuyo, toyo, at calamansi juice. Haluing mabuti hanggang maghalo ang lasa.
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">5</div>
+                        <span class="step-title">Timplahan</span>
+                        Lagyan ng asin at paminta ayon sa panlasa. Para sa mas creamy na texture, idagdag ang mayonnaise at haluing mabuti.
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">6</div>
+                        <span class="step-title">Painitin at ihain</span>
+                        Ilagay ang sisig sa mainit na kawali o sizzling plate. Painitin ng 3-5 minuto habang hinahalo. Ihain agad habang mainit at umuusok!
+                    </div>
                 </div>
                 
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <span class="step-title">I-ihaw o iprito ang baboy.</span>
-                    Ihawin ang pinakuluang baboy hanggang maging bahagyang crispy ang balat. Maaari ring iprito kung walang ihawan.
-                </div>
-                
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <span class="step-title">Tadtarin ang karne.</span>
-                    Kapag lumamig na, tadtarin ang baboy sa maliliit na piraso gamit ang kutsilyo.
-                </div>
-                
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <span class="step-title">Ihain ang halo.</span>
-                    Sa isang mangkok, pagsamahin ang tinadtad na baboy, sibuyas, siling labuyo, toyo, at calamansi juice. Haluing mabuti.
-                </div>
-                
-                <div class="step">
-                    <div class="step-number">5</div>
-                    <span class="step-title">Timplahan.</span>
-                    Lagyan ng asin at paminta ayon sa panlasa. Maaari ring idagdag ang mayonnaise kung nais ng mas creamy na lasa.
-                </div>
-                
-                <div class="step">
-                    <div class="step-number">6</div>
-                    <span class="step-title">Painitin at ihain.</span>
-                    Ilagay ang sisig sa mainit na kawali o sizzling plate at painitin nang kaunti bago ihain. Ihain habang mainit.
-                </div>
-                
-                <div class="panel-header" style="margin-top: 40px;">
-                    <svg class="section-icon" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M12 9V14" stroke="currentColor" stroke-width="2" fill="none"/>
-                        <circle cx="12" cy="18" r="1" fill="currentColor"/>
-                        <path d="M12 2L2 7V22H22V7L12 2Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
-                    </svg>
-                    <h2>PAALALA</h2>
-                </div>
-                
-                <ul>
-                    <li>
-                        <svg class="warning-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <div class="panel-header" style="margin-top: 50px;">
+                    <span class="icon-container">
+                        <svg class="section-icon" viewBox="0 0 24 24" aria-hidden="true">
                             <path d="M12 9V14M12 18H12.01" stroke="currentColor" stroke-width="2" fill="none"/>
                             <path d="M12 2L2 22H22L12 2Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
                         </svg>
-                        Mag-ingat sa paggamit ng kutsilyo at mainit na kawali.
-                    </li>
-                    <li>
-                        <svg class="warning-icon" viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M12 9V14M12 18H12.01" stroke="currentColor" stroke-width="2" fill="none"/>
-                            <path d="M12 2L2 22H22L12 2Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
-                        </svg>
-                        Iayon ang dami ng sili sa kakayahang kumain ng maanghang.
-                    </li>
-                    <li>
-                        <svg class="warning-icon" viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M12 9V14M12 18H12.01" stroke="currentColor" stroke-width="2" fill="none"/>
-                            <path d="M12 2L2 22H22L12 2Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
-                        </svg>
-                        Siguraduhing lutong mabuti ang baboy upang maiwasan ang sakit.
-                    </li>
-                </ul>
+                    </span>
+                    <h2>PAALALA AT TIPS</h2>
+                </div>
                 
-                <div style="text-align: center; margin-top: 30px; font-style: italic; color: #8b4513; padding: 15px; background: rgba(249, 243, 235, 0.7); border-radius: 8px;">
-                    Maligayang pagluluto at masarap na pagkain!
+                <div style="background: linear-gradient(135deg, rgba(255,230,230,0.9), rgba(255,240,240,0.9)); padding: 25px; border-radius: 15px; border-left: 6px solid #c14444;">
+                    <ul style="border-left: none;">
+                        <li>
+                            <svg class="warning-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M12 9V14M12 18H12.01" stroke="currentColor" stroke-width="2" fill="none"/>
+                                <path d="M12 2L2 22H22L12 2Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                            </svg>
+                            <strong>Ligtas na pagluluto:</strong> Mag-ingat sa paggamit ng kutsilyo at mainit na kawali. Gumamit ng oven mitts kapag naghahawak ng mainit na kaldero.
+                        </li>
+                        <li>
+                            <svg class="warning-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M12 9V14M12 18H12.01" stroke="currentColor" stroke-width="2" fill="none"/>
+                                <path d="M12 2L2 22H22L12 2Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                            </svg>
+                            <strong>Timpla ng anghang:</strong> Iayon ang dami ng sili sa kakayahang kumain ng maanghang. Pwedeng tanggalin ang buto para mas mild ang anghang.
+                        </li>
+                        <li>
+                            <svg class="warning-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M12 9V14M12 18H12.01" stroke="currentColor" stroke-width="2" fill="none"/>
+                                <path d="M12 2L2 22H22L12 2Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                            </svg>
+                            <strong>Kaligtasan sa pagkain:</strong> Siguraduhing lutong mabuti ang baboy (walang pink parts) upang maiwasan ang foodborne illnesses.
+                        </li>
+                        <li>
+                            <svg class="warning-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M12 9V14M12 18H12.01" stroke="currentColor" stroke-width="2" fill="none"/>
+                                <path d="M12 2L2 22H22L12 2Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                            </svg>
+                            <strong>Pag-iimbak:</strong> Maaaring i-refrigerate ang leftover sisig sa airtight container ng hanggang 3 araw.
+                        </li>
+                    </ul>
+                </div>
+                
+                <div style="text-align: center; margin-top: 40px; padding: 20px; background: linear-gradient(90deg, rgba(193,68,68,0.1), rgba(209,140,71,0.1), rgba(139,69,19,0.1)); border-radius: 15px;">
+                    <p style="font-size: 1.3rem; font-style: italic; color: #8b4513; font-weight: 700;">
+                        🍽️ Maligayang pagluluto at masarap na pagkain! 🍽️
+                    </p>
+                    <p style="color: #5a3c2a; margin-top: 10px;">
+                        I-share ang iyong sisig creation sa #SisigRecipePh
+                    </p>
                 </div>
             </div>
         </div>
@@ -636,46 +1036,69 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const printBtn = document.getElementById('printBtn');
+     const printBtn = document.getElementById('printBtn');
             const previewToggle = document.getElementById('previewToggle');
+            const panels = document.querySelectorAll('.panel');
             
             // Print functionality
             printBtn.addEventListener('click', function() {
-                window.print();
+                this.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="white" style="margin-right: 8px; vertical-align: middle;"><path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/></svg> Inireready ang print...';
+                
+                setTimeout(() => {
+                    window.print();
+                    this.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="white" style="margin-right: 8px; vertical-align: middle;"><path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/></svg> Download PDF / I-print';
+                }, 1000);
             });
             
             // Print preview toggle
             previewToggle.addEventListener('change', function() {
                 if (this.checked) {
                     document.body.classList.add('print-preview');
+                    document.querySelector('.brochure-container').style.transform = 'rotateY(2deg)';
                 } else {
                     document.body.classList.remove('print-preview');
+                    document.querySelector('.brochure-container').style.transform = 'none';
                 }
             });
             
-            // Add subtle animation to icons on hover
-            const icons = document.querySelectorAll('.icon, .section-icon, .title-icon');
-            icons.forEach(icon => {
-                icon.addEventListener('mouseenter', function() {
-                    this.style.transform = 'scale(1.1)';
-                    this.style.transition = 'transform 0.2s ease';
-                });
-                
-                icon.addEventListener('mouseleave', function() {
-                    this.style.transform = 'scale(1)';
-                });
-            });
-            
-            // Panel hover effect enhancement
-            const panels = document.querySelectorAll('.panel');
+            // Panel hover effects
             panels.forEach(panel => {
                 panel.addEventListener('mouseenter', function() {
-                    this.style.zIndex = '10';
+                    this.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.15)';
                 });
                 
                 panel.addEventListener('mouseleave', function() {
-                    this.style.zIndex = '1';
+                    this.style.boxShadow = 'none';
                 });
+            });
+            
+            // Animate step cards on scroll
+            const observerOptions = {
+                threshold: 0.2,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe step cards
+            document.querySelectorAll('.step').forEach(step => {
+                step.style.opacity = '0';
+                step.style.transform = 'translateY(20px)';
+                step.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(step);
+            });
+            
+            // Add floating animation to decorative elements
+            const leaves = document.querySelectorAll('.decorative-leaf');
+            leaves.forEach((leaf, index) => {
+                leaf.style.animation = `float ${8 + index * 2}s ease-in-out infinite`;
             });
         });
     </script>
